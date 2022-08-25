@@ -82,6 +82,7 @@ test('blue button turns gray when is disabled and blue when is enabled', () => {
 
   fireEvent.click(checkBox);
   expect(colorBtn).toHaveStyle({backgroundColor: 'blue'});
+  
 
 });
 
