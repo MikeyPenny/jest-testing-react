@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
 import './App.css';
 
+export const replaceCamelWithSpaces = (colorName: string) => {
+  return colorName.replace(/\B([A-Z])\B/g, ' $1');
+}
+
 function App() {
+
+  const [color, setColor] = useState('red');
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const changeColorHandler = (ev: React.MouseEvent) => {
+    ev.preventDefault();
+    if (color === 'red') {
+      setColor('blue');
+    }
+
+    if (color === 'blue') {
+      setColor('red');
+    }
+    
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button 
+        style={{backgroundColor: isDisabled ? 'gray' : color}}
+        disabled={isDisabled}
+        onClick={changeColorHandler} >
+          Change to {color === 'red' ? 'blue' : 'red'}
+      </button>
+      <input type="checkbox" onChange={(ev) => setIsDisabled(ev.target.checked)} />
     </div>
   );
 }
